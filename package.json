@@ -1,0 +1,32 @@
+{
+  "name": "trendChattr-API",
+  "version": "0.0.1",
+  "description": "The backend API for trendChattr",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rlgod/trendChattr-API.git"
+  },
+  "keywords": [
+    "trendChattr",
+    "API"
+  ],
+  "author": "Daniel Parker & Dale Salter",
+  "license": "proprietary",
+  "bugs": {
+    "url": "https://github.com/rlgod/trendChattr-API/issues"
+  },
+  "homepage": "https://github.com/rlgod/trendChattr-API",
+  "dependencies": {
+    "body-parser": "^1.4.3",
+    "cors": "^2.4.1",
+    "express": "^4.5.1",
+    "moment": "^2.7.0",
+    "mongoose": "^3.8.12",
+    "passport": "^0.2.0",
+    "socket.io": "^1.0.6"
+  }
+}
