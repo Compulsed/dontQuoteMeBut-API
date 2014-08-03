@@ -77,7 +77,18 @@ router.get('/', function(req, res) {
 router.route('/quotes')
 	// Get the last 20 quotes (from now)
 	.get(function(req, res){
-
+		QuoteModel
+			.find()
+			.sort([['timeStamp', 'descending']])
+			.limit(20)
+			.select('id _id timeStamp quoteBody quotee')
+			.exec(function(err, quotes){
+				if(err){
+					res.send('error', {status: 500});
+				} else {
+					res.send({quotes: quotes});
+				}
+			});
 	})
 	// Post a quote
 	.post(function(req, res){
@@ -86,17 +97,18 @@ router.route('/quotes')
 		//	userId: 	Number,
 		//	quoteBody: 	String,
 		//	quotee: 	String
+		console.log(req);
 
 		var quote = new QuoteModel();
-		quote.userId 	= req.userId;
-		quote.quoteBody = req.quoteBody;
-		quote.quotee 	= req.quotee;
+		quote.userId 	= req.body.userId;
+		quote.quoteBody = req.body.quoteBody;
+		quote.quotee 	= req.body.quotee;
 
 		quote.save(function(err, savedQuote){
 			if (err)
 				res.send(err);
 
-			res.send("{id:" + savedQuote._id + "}");
+			res.send(savedQuote);
 		});
 	})
 	// Update your own quote (admin override)
