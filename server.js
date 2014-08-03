@@ -12,6 +12,13 @@ var http			= require('http').Server(app);
 var server 			= app.listen(port);
 var cors			= require('cors');
 var bodyParser 		= require('body-parser');
+var mongoose		= require('mongoose');
+
+var mongoUri = 	process.env.MONGOLAB_URI ||
+  				process.env.MONGOHQ_URL ||
+  				'mongodb://localhost/dqmb';
+
+mongoose.connect(mongoUri);
 
 // Import request functionality
 var Middleware 	= require('./app/middleware');
@@ -41,17 +48,46 @@ router.use(function(req, res, next){
 });
 
 
-// ---- /chatrooms ----
 router.route('*')
 	.all(function(req, res, next) {
 		Middleware(req, res, next);
 	});
 
+router.route('/quotes')
+	// Get the last 20 quotes (from now)
+	.get(function(req, res){
+
+	})
+	// Post a quote
+	.post(function(req, res){
+
+	})
+	// Update your own quote (admin override)
+	.put(function(req, res){
+
+	})
+	// Delete your own quote (admin override)
+	.delete(function(req,res){
+
+	})
+
+router.route('/quotes/:from_time')
+	// Get 20 quotes prior to the given time :from_time
+	.get(function(req, res){
+
+	})
+
+
+
+//===================================
+//	SOCKET.IO ROUTES
+//===================================
+
 
 //===================================
 //	END ROUTES
 //===================================
-// All routes will be prefixed with '/api'
+// All routes will be relative to '/'
 app.use('/', router);
 
 // // Listen for requests
